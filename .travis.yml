@@ -1,39 +1,23 @@
 language: android
+script: ./gradlew build assembleRelease
 android:
   components:
-    # Uncomment the lines below if you want to
-    # use the latest revision of Android SDK Tools
-    # - platform-tools
-    # - tools
+  - build-tools-20.0.0
+  - android-19
 
-    # The BuildTools version used by your project
-    - build-tools-22.0.1
+deploy:
+  - provider: releases
+    api_key:
+      <your key>
+    file: app/build/outputs/apk/app-release.apk
+    on:
+      repo: Zzivi/Sodexo
+      tags: true
 
-    # The SDK version used to compile your project
-    - android-23
-
-    # Additional components
-    - extra-google-google_play_services
-    - extra-google-m2repository
-    - extra-android-m2repository
-    - addon-google_apis-google-19
-
-    # Specify at least one system image,
-    # if you need to run emulator(s) during your tests
-    - sys-img-armeabi-v7a-android-19
-    - sys-img-x86-android-17
-
-    # Emulator Management: Create, Start and Wait
-    before_script:
-      - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a
-      - emulator -avd test -no-skin -no-audio -no-window &
-      - android-wait-for-emulator
-      - adb shell input keyevent 82 &
-
-    deploy:
-      provider: releases
-      api_key: "****"
-      file: "/app/build/outputs/app-release.apk"
-      skip_cleanup: true
-      on:
-        tags: true
+notifications:
+  email:
+    recipients:
+    - daniel.viorreta@zzivi.com
+    - romina.liuzzi@zzivi.com
+    on_success: always
+    on_failure: always
