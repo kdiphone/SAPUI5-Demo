@@ -1,29 +1,40 @@
-language: ruby
-rvm:
- - 2.2
- - jruby
- 
-language: android
 dist: trusty
-android:
-  components:
-    # Uncomment the lines below if you want to
-    # use the latest revision of Android SDK Tools
-    # - tools
-    # - platform-tools
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+language: node_js
+node_js:
+  - "7"
+env:
+    - EMBER_VERSION=default
+    - EMBER_VERSION=release
+    - EMBER_VERSION=beta
+    - EMBER_VERSION=canary
+jobs:
+  fast_finish: true
+  allow_failures:
+    - env: EMBER_VERSION=release
+    - env: EMBER_VERSION=beta
+    - env: EMBER_VERSION=canary
 
-    # The BuildTools version used by your project
-    - build-tools-26.0.2
-
-    # The SDK version used to compile your project
-    - android-26
-
-    # Additional components
-    - extra-google-google_play_services
-    - extra-google-m2repository
-    - extra-android-m2repository
-
-    # Specify at least one system image,
-    # if you need to run emulator(s) during your tests
-    - sys-img-x86-android-26
-    - sys-img-armeabi-v7a-android-17
+before_install:
+    # setting the path for phantom.js 2.0.0
+    - export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
+    # starting a GUI to run tests, per https://docs.travis-ci.com/user/gui-and-headless-browsers/#using-xvfb-to-run-tests-that-require-a-gui
+    - export DISPLAY=:99.0
+    - sh -e /etc/init.d/xvfb start
+    - "npm config set spin false"
+    - "npm install -g npm@^2"
+install:
+    - mkdir travis-phantomjs
+    - wget https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2 -O $PWD/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2
+    - tar -xvf $PWD/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2 -C $PWD/travis-phantomjs
+    - export PATH=$PWD/travis-phantomjs:$PATH
+    - npm install -g bower
+    - npm install
+    - bower install
+script:
+    - ember test --server
