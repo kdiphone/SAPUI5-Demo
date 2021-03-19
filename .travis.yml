@@ -1,3 +1,7 @@
+install: ./install-dependencies.sh
+install:
+  - bundle install --path vendor/bundle
+  - npm install
 language: ruby
 rvm:
  - 2.2
