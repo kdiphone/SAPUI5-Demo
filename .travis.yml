@@ -1,16 +1,7 @@
-language: android
- ….
- jdk: oraclejdk8
- ….
- before_script:
-   - cd android
- script:
-   - chmod +x generate_apks.sh
-   - chmod +x configedit.sh
-   - ./generate_apks.sh
- …..
- after_success:
-   - bash <(curl -s https://codecov.io/bash)
-   - cd ..
-   - chmod +x upload-apk.sh
-   - ./upload-apk.sh
+sudo: false
+language: node_js
+node_js:
+  - 'node'
+  - '6'
+  - '5'
+  - '4'
