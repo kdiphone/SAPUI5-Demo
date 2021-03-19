@@ -1,0 +1,70 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="AAAAAAAA.AAAAAAAA.controller.View1" displayBlock="true">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+						<HBox>
+							<Table id="table0" items="{path : '/Customers'}" growingThreshold="4" width="50%">
+								<items>
+									<ColumnListItem type="Active" id="item0">
+										<cells>
+											<Text text="{City}" id="text2"/>
+											<Text text="{Country}" id="text3"/>
+											<Text text="{CompanyName}" id="text4"/></cells>
+									</ColumnListItem>
+								</items>
+								<columns>
+									<Column id="column0">
+										<header>
+											<Label text="Header 1" id="label0"/>
+										</header>
+									</Column>
+									<Column id="column1">
+										<header>
+											<Label text="Header 2" id="label1"/>
+										</header>
+									</Column>
+									<Column id="column2">
+										<header>
+											<Label text="Header 3" id="label2"/>
+										</header>
+									</Column>
+								</columns>
+							</Table>
+							<Table id="table1" width="50%" items="{JSONMODEL>/results}">
+								<items>
+									<ColumnListItem type="Active" id="item1">
+										<cells>
+											<Text text="{JSONMODEL>Name}" id="text21"/>
+											<Text text="{JSONMODEL>Phone}" id="text13"/>
+											<Text text="{JSONMODEL>Email}" id="text41"/></cells>
+									</ColumnListItem>
+								</items>
+								<columns>
+									<Column id="column11">
+										<header>
+											<Label text="Header 1" id="label01"/>
+										</header>
+									</Column>
+									<Column id="column111">
+										<header>
+											<Label text="Header 2" id="label11"/>
+										</header>
+									</Column>
+									<Column id="column21">
+										<header>
+											<Label text="Header 3" id="label21"/>
+										</header>
+									</Column>
+								</columns>
+							</Table>
+						</HBox>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
+
+<!--Demo-->
