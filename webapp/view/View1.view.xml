@@ -32,6 +32,7 @@
 						<!--			</Column>-->
 						<!--		</columns>-->
 						<!--	</Table>-->
+						<Button id="idBtn" text="Single Opearation" press="fnSingleOpearation" />
 							<Table id="table1" width="100%" items="{JSONMODEL>/results}">
 								<items>
 									<ColumnListItem type="Active" id="item1">
